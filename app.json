@@ -1,0 +1,109 @@
+{
+  "id": "rs.muete.homey-nanoleaf",
+  "version": "1.0.0",
+  "sdk": 3,
+  "compatibility": ">=5.0.0",
+  "name": {
+    "en": "Nanoleaf Community"
+  },
+  "description": "The community version of the Nanoleaf app",
+  "brandColor": "#3FAE29",
+  "category": [
+    "lights"
+  ],
+  "images": {
+    "large": "/assets/images/large.jpg",
+    "small": "/assets/images/small.jpg"
+  },
+  "bugs": {
+    "url": "https://bitbucket.org/ultimatetester/rs.muete.homey-nanoleaf/issues"
+  },
+  "capabilities": {
+    "previous_scene": {
+      "type": "boolean",
+      "title": {
+        "en": "Previous Scene"
+      },
+      "getable": false,
+      "setable": true,
+      "uiComponent": "button"
+    },
+    "next_scene": {
+      "type": "boolean",
+      "title": {
+        "en": "Next Scene"
+      },
+      "getable": false,
+      "setable": true,
+      "uiComponent": "button"
+    }
+  },
+  "permissions": [],
+  "author": {
+    "name": "ultimate-tester"
+  },
+  "drivers": [
+    {
+      "id": "shapes",
+      "name": {
+        "en": "Shapes"
+      },
+      "class": "light",
+      "capabilities": [
+        "onoff",
+        "dim",
+        "previous_scene",
+        "next_scene",
+        "measure_power"
+      ],
+      "capabilitiesOptions": {
+        "measure_power": {
+          "approximated": true
+        }
+      },
+      "settings": [
+        {
+          "type": "group",
+          "label": {
+            "en": "General settings"
+          },
+          "children": [
+            {
+              "id": "scene_transition",
+              "type": "checkbox",
+              "value": false,
+              "label": {
+                "en": "Scene Transition"
+              }
+            }
+          ]
+        }
+      ],
+      "images": {
+        "large": "/drivers/shapes/assets/images/large.jpg",
+        "small": "/drivers/shapes/assets/images/small.jpg"
+      },
+      "pair": [
+        {
+          "id": "ip"
+        }
+      ]
+    }
+  ],
+  "flow": {
+    "actions": [
+      {
+        "id": "set_scene",
+        "title": {
+          "en": "Set a specific scene"
+        },
+        "args": [
+          {
+            "name": "scene",
+            "type": "text"
+          }
+        ]
+      }
+    ]
+  }
+}

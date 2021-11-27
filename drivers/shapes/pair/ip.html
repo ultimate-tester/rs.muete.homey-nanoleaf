@@ -1,0 +1,42 @@
+<h1>Configure Device</h1>
+<span>Make sure the IP address of the Nanoleaf device is static/reserved</span><br/><br/>
+<label for="ip">IP Of Nanoleaf Device:</label>
+<input type="text" name="ip" id="ip"/><br/>
+<input type="button" value="Connect" onclick="return onConnectClick();"/>
+
+<script type="text/javascript">
+  function onConnectClick() {
+    console.log('onSubmitForm');
+    var ipDomElement = document.getElementById('ip');
+
+    Homey.setTitle('Pairing...');
+    Homey.showLoadingOverlay();
+
+    Homey.emit('start_pairing', {
+      name: 'Nanoleaf Shapes',
+      data: {
+        mac: null,
+        token: '',
+        ipAddress: ipDomElement.value,
+      },
+    }, (err, result) => {
+      if (!!err) {
+        console.log(err);
+        return;
+      }
+
+      Homey.setTitle('Almost there!');
+
+      Homey.createDevice(result, (err) => {
+        if (!!err) {
+          console.log(err);
+          return;
+        }
+
+        Homey.done();
+      });
+    });
+
+    return false;
+  }
+</script>
